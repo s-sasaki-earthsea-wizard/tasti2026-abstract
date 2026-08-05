@@ -19,6 +19,7 @@ This is a sibling repository of
 | `abstract.tex` | Extended abstract draft (300–800 words required) |
 | `tasti2026.sty` | LaTeX style reproducing the official docx/PDF template formatting |
 | `template/` | Official template PDF (reference copy) |
+| `docs/` | Working documentation: submission requirements, numerical method, benchmark canon, NISAR-scale estimates, writing notes (Japanese) |
 | `Makefile` | `make` / `make wordcount` / `make clean` |
 | `HANDOVER.md` | Session handover notes (Japanese) |
 

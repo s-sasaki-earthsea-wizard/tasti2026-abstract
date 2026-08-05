@@ -2,6 +2,10 @@
 
 作成日: 2026-08-06 / 作成: 華扇 (Claude Code session @ MintPy fork repo)
 
+> **詳細資料は [docs/](docs/) にある** ([project_overview.md](docs/project_overview.md)
+> から辿れる)。本ファイルは要約 + 残タスクの一覧。数値を触るときは必ず
+> [docs/results.md](docs/results.md) (系列混同の禁止事項) を先に読むこと。
+
 ## ⚠️ 最重要: 締切
 
 **Abstract submission deadline: 2026-08-15** — この repo 作成時点で**残り 9 日**。
@@ -41,10 +45,22 @@ PDF アップロード (≤ 10 MB)、TASTI conference submission system 経由�
   `reports/` 配下 (report_torch.md / report_large_scene.md ほか)。abstract に数値を足すときは
   必ずここから引く。
 
-## 3. この repo の状態 (v0.1 skeleton)
+## 3. この repo の状態 (v0.1 skeleton + docs)
 
+- `docs/` — 詳細資料 5 本 (vrc-insar-batched-cholesky-LT/docs と同粒度):
+  - [project_overview.md](docs/project_overview.md) — 位置づけ・聴衆・結論先取り
+  - [submission_requirements.md](docs/submission_requirements.md) — テンプレ要件完全版 + 提出前チェックリスト
+  - [numerical_method.md](docs/numerical_method.md) — 手法の数理 + 実装要点 + Q&A 想定問答
+  - [results.md](docs/results.md) — **ベンチ数値の正典** (S1/S2/S3 の 3 系列と混同禁止事項)
+  - [compute_scale.md](docs/compute_scale.md) — NISAR スケール外挿と但し書き
+  - [abstract_notes.md](docs/abstract_notes.md) — 段落ごとの主張→出典対応表、判断待ち事項 5 件
 - `abstract.tex` — ドラフト一式 (題目 / 著者 / keywords / 本文 4 段落 / references 3 件)。
-  **本文 465 words** (規定 300–800、`make wordcount` で再計測可)。
+  **本文 496 words** (規定 300–800、`make wordcount` で再計測可)。
+  **2026-08-06 修正済み**: 初版は「Fernandina 16.5× vs CPU baseline」と書いていたが、
+  16.5× は**同一 GPU での QR vs Cholesky 対決 (S1 系列)** の数字で CPU 比ではない
+  (過去に一度取り違えて撤回した前科のある混同)。現在は S1 (16.5×, kernel launches
+  3.8M→57) / S2 (Galapagos CPU 比 36.4×/44.4×) / S3 (5 シーン E2E 5.3–93.8×) を
+  正しく書き分けてある。
 - `tasti2026.sty` — 公式テンプレの LaTeX 再現。実装済み: A4 / margins 上下 2.54 cm・
   左右 3.17 cm / 10.5 pt / single spacing / parskip 段落 / footer "TASTI-2026" /
   title-block 用マクロ (`\abstracttitle` `\abstractauthors` `\abstractaffil`
@@ -63,16 +79,18 @@ PDF アップロード (≤ 10 MB)、TASTI conference submission system 経由�
      XeLaTeX + fontspec に切替 (sty 内にコメントあり)
    - タイトル 14 pt はサンプル PDF からの目測。docx で要確認
    - title-block 間の余白 (`\vspace{-\parskip}` で詰めてある) の調整
-3. **本文の推敲** — 数値・主張のトーン確認。特に "submitted upstream" の表現は
+3. **本文の推敲** — [docs/abstract_notes.md](docs/abstract_notes.md) の
+   主張→出典対応表に照らして 1 文ずつ検証。"submitted upstream" の表現は
    PR が **merge 前** であることと整合させておくこと (merge されたら書き換え)。
-4. **著者情報の確定** — 現状 `Syota Sasaki*, 1) Earthsea Wizard, Japan` としてある。
+4. **判断待ち 5 件の解消** — トラック (0201 推し) / 図の有無 (入れる推し) /
+   NISAR 定量 1 文 (追加推し) / タイトル / 発表形態。詳細と華扇の推しは
+   [docs/abstract_notes.md](docs/abstract_notes.md) §判断待ち事項。
+5. **著者情報の確定** — 現状 `Syota Sasaki*, 1) Earthsea Wizard, Japan` としてある。
    affiliation の英字表記 (屋号をどう出すか) は Syota さんの確認が必要。
-5. **references の体裁確認** — テンプレは番号付き `[1]` 形式のみ規定。現状
-   `thebibliography` で 3 件 (NISAR handbook / Yunjun 2019 / PyTorch NeurIPS)。
-6. **図の要否判断** — テンプレ上は任意。speedup bar chart (5-scene sweep) を 1 枚
-   入れると説得力が出るが、words とページ体裁次第。データは mintpy-benchmark の
-   report から再生成可能。
-7. **提出** — PDF 化して submission system にアップロード (≤ 10 MB)。
+6. **図を入れる場合** — `scripts/plot_speedup.py` を新規作成 (仕様は
+   [docs/abstract_notes.md](docs/abstract_notes.md) §図の仕様メモ)。
+7. **提出** — [docs/submission_requirements.md](docs/submission_requirements.md) の
+   チェックリストを全通過させてから PDF を submission system にアップロード (≤ 10 MB)。
 
 ## 5. 運用メモ
 
