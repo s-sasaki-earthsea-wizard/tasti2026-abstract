@@ -13,6 +13,7 @@
 | ファイルサイズ | **≤ 10 MB** |
 | 言語 | 英語 |
 | 分量 | **本文 300〜800 words** (最小 300 は必須要件) |
+| **short abstract** | **200 words 以下**。提出システムのフォーム欄に直接入力する (PDF とは別) → [../short_abstract.md](../short_abstract.md) |
 | 査読 | TASTI Program Committee が採否とセッション割当を審査 |
 | 採択後 | 会議 web サイトで参加者に公開される |
 | 会期 | 2026-11-08 〜 11-11、International Convention Center, Tainan, Taiwan |
@@ -114,6 +115,7 @@ Roman 10.5 pt で約 12.1 pt なので、**12.6 pt は "Single" の忠実な解�
 ## 提出前チェックリスト
 
 - [ ] `make wordcount` で本文 300〜800 words
+- [ ] `make shortcount` で short abstract 200 words 以下
 - [ ] タイトル 50 words 以内、title case
 - [ ] 発表者 * / 肩書きなし / affiliation は組織名 + 国名のみ
 - [ ] keywords ≤ 5

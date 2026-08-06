@@ -27,6 +27,7 @@ PDF アップロード (≤ 10 MB)、TASTI conference submission system 経由�
 | 項目 | 状態 |
 | --- | --- |
 | 本文 | **665 words** (規定 300–800、`make wordcount` で再計測) |
+| short abstract | **199 words** (規定 ≤ 200、`make shortcount` で再計測)。[short_abstract.md](short_abstract.md) — 提出フォームに直接入力する |
 | ページ数 | **2 ページ** |
 | 図表 | **Fig. 1** (手法の模式図) + **Table 1** (5 シーン実測) |
 | ビルド | `make` で通過。**Overfull / Underfull ボックス 0 件** |
@@ -72,6 +73,7 @@ PDF アップロード (≤ 10 MB)、TASTI conference submission system 経由�
 
 ```text
 abstract.tex          本文 (% BODY-START / % BODY-END で wordcount 範囲を画定)
+short_abstract.md     提出フォーム用 short abstract (≤ 200 words) + 取捨選択の根拠
 tasti2026.sty         公式テンプレの LaTeX 再現
 Makefile              make / make figures / make wordcount / make clean
 figures/

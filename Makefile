@@ -42,6 +42,12 @@ wordcount:
 	      f && !skip' abstract.tex \
 		| sed 's/\\[a-zA-Z]*{[^}]*}//g; s/\\[a-zA-Z]*//g; s/[{}$$]//g' | wc -w
 
+## shortcount: Count words in the short abstract (submission form, max 200)
+# Counts only the block that is pasted into the form, i.e. everything between
+# the "貼り付け本文" heading and the next horizontal rule.
+shortcount:
+	@awk '/^## .*貼り付け本文/{f=1;next} f && /^---$$/{exit} f' short_abstract.md | wc -w
+
 ## clean: Remove LaTeX build artifacts (generated figures are kept)
 clean:
 	latexmk -C
@@ -50,4 +56,4 @@ clean:
 distclean: clean
 	rm -f $(FIGS)
 
-.PHONY: all figures wordcount clean distclean
+.PHONY: all figures wordcount shortcount clean distclean
