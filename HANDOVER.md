@@ -5,7 +5,9 @@
 > **詳細資料は [docs/](docs/) にある** ([project_overview.md](docs/project_overview.md)
 > から辿れる)。数値を触るときは必ず [docs/results.md](docs/results.md)
 > (系列混同の禁止事項) を、本文を触るときは
-> [docs/abstract_notes.md](docs/abstract_notes.md) (表現上の注意 8 項目) を先に読むこと。
+> [docs/abstract_notes.md](docs/abstract_notes.md) (表現上の注意 9 項目) を先に読むこと。
+> ポスターを書くときも同じ — 特に**注意 9 (CholeskyQR2 の引用範囲)** と
+> **注意 4 (規模依存を主張しない)** は抄録を離れても有効。
 
 ## ✅ 提出完了 (2026-08-06)
 
