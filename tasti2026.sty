@@ -22,14 +22,48 @@
 \RequirePackage{newtxmath}
 \RequirePackage{graphicx}
 \RequirePackage{fancyhdr}
+\RequirePackage{caption}
+\RequirePackage{booktabs}
+% Long reference URLs must be breakable, otherwise they overflow the margin and
+% stretch the preceding line to an unreadable degree.
+\RequirePackage{url}
+\urlstyle{tt}
+\RequirePackage{etoolbox}
+% Keeps a run-in heading from being stranded at the foot of a page.
+\RequirePackage{needspace}
 
-% 10.5 pt body font on a single-spaced (1.2x) baseline
+% 10.5 pt body font on a single-spaced (1.2x) baseline.
+% Measured on the official sample PDF, its body leading is about 15 pt. The
+% requirement only says "Single", and Word's single spacing for Times New Roman
+% 10.5 pt is about 12.1 pt, so 12.6 pt is a faithful reading of the rule and
+% leaves more room for content. Raise the second argument to 15 if an exact
+% visual match to the sample is ever demanded.
 \renewcommand{\normalsize}{\@setfontsize\normalsize{10.5}{12.6}}
 \normalsize
 
 % Paragraphs: one blank line between, no indent
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{\baselineskip}
+
+% Template requirement: figure captions go below the figure, table captions
+% above the table. Put \caption after the graphic but before the tabular.
+\captionsetup{
+  font=small,
+  labelfont=bf,
+  labelsep=period,
+  justification=justified,
+  skip=6pt}
+\captionsetup[figure]{name=Fig.}
+\captionsetup[table]{name=Table,position=above,skip=4pt}
+
+% Reference list: the template shows a plain bold heading at body size, and the
+% document-wide \parskip would otherwise open a full blank line between entries.
+\renewcommand{\refname}{\normalsize References}
+\AtBeginEnvironment{thebibliography}{%
+  \small
+  \setlength{\parskip}{0pt}%
+  \setlength{\itemsep}{0pt}%
+}
 
 % Footer "TASTI-2026" on every page, no rules
 \fancyhf{}
@@ -46,27 +80,46 @@
 % Presenting author: put * first, e.g. Feng Hwang\affmark{*,1,2}
 \newcommand{\affmark}[1]{\textsuperscript{#1)}}
 
-% Title: bold, centered. 14 pt is an eyeball match to the template sample
-% (the guideline only mandates "bold, centered"); adjust if the docx differs.
+% The title block lines sit close together in the official template: measured
+% on the sample PDF, the title starts at y=70 and the body at y=190, with the
+% author/affiliation/e-mail/keyword lines about one body line apart. A plain
+% `center' environment would add its \topsep on both sides on top of the
+% document-wide \parskip, spacing them roughly twice as far and costing about
+% five body lines. So these use bare \centering (no list environment) and
+% cancel \parskip explicitly, adding back only the gaps the template shows.
+%
+% Template rules encoded here:
+%   - affiliation follows the author line with NO blank line
+%   - the presenting author's e-mail goes on the line after the affiliation
+%   - one blank line separates the keyword line from the body
+\newlength{\abs@titlegap}   \setlength{\abs@titlegap}{7pt}
+\newlength{\abs@blockgap}   \setlength{\abs@blockgap}{4pt}
+
+% Title: title case, bold, centered. 14 pt is an eyeball match to the template
+% sample (the guideline only mandates "bold, centered"); adjust if the docx differs.
 \newcommand{\abstracttitle}[1]{%
-  \begin{center}%
-    \fontsize{14}{16.8}\selectfont\bfseries #1%
-  \end{center}\vspace{-\parskip}}
+  {\centering\fontsize{14}{16.8}\selectfont\bfseries #1\par}%
+  \vspace{-\parskip}\vspace{\abs@titlegap}}
 
 % Author list: full first + last names, comma separated, centered
 \newcommand{\abstractauthors}[1]{%
-  \begin{center}#1\end{center}\vspace{-\parskip}}
+  {\centering #1\par}%
+  \vspace{-\parskip}}
 
-% Affiliation line(s): italic, centered, organization + country only
+% Affiliation line(s): italic, centered, organization + country only.
+% Directly under the author line -- no gap added.
 \newcommand{\abstractaffil}[1]{%
-  \begin{center}\itshape #1\end{center}\vspace{-\parskip}}
+  {\centering\itshape #1\par}%
+  \vspace{-\parskip}}
 
-% Presenting author's email: italic, underlined, centered
+% Presenting author's email: italic, underlined, on the next line
 \newcommand{\abstractemail}[1]{%
-  \begin{center}\itshape\underline{#1}\end{center}\vspace{-\parskip}}
+  {\centering\itshape\underline{#1}\par}%
+  \vspace{-\parskip}\vspace{\abs@blockgap}}
 
 % Keyword line: "keywords" in bold, max 5 keywords
 \newcommand{\abstractkeywords}[1]{%
-  \begin{center}\textbf{keywords}: #1\end{center}}
+  {\centering\textbf{keywords}: #1\par}%
+  \vspace{-\parskip}\vspace{\abs@titlegap}}
 
 \endinput
