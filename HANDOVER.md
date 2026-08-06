@@ -7,10 +7,22 @@
 > (系列混同の禁止事項) を、本文を触るときは
 > [docs/abstract_notes.md](docs/abstract_notes.md) (表現上の注意 8 項目) を先に読むこと。
 
-## ⚠️ 最重要: 締切
+## ✅ 提出完了 (2026-08-06)
 
-**Abstract submission deadline: 2026-08-15** — 本日 2026-08-06 時点で**残り 9 日**。
-PDF アップロード (≤ 10 MB)、TASTI conference submission system 経由。
+**2026-08-06 15:42 に提出、受理メール受信済み** (締切 2026-08-15 の 9 日前)。
+
+| 項目 | 値 |
+| --- | --- |
+| **Paper No.** | **T0043** |
+| Conference | TASTI |
+| Session Type | **Poster** (※ 最終的な発表形態は主催側が決定する旨の注記あり) |
+| Topic / Subtopic | 02 Space Applications and Services / **0201 Earth Observation and Remote Sensing** |
+| Presenter / Contact | Syota Sasaki |
+
+受理メールに載った abstract は [short_abstract.md](short_abstract.md) の 199 words と
+**完全に一致**。keywords 5 件、著者表記 "Syota Sasaki (Earthsea Wizard)" も想定どおり。
+
+→ **これ以降、抄録の内容は変更しない** (§4-3 の凍結判断)。次は**ポスター**。
 
 ## 1. 目的
 
@@ -20,9 +32,9 @@ PDF アップロード (≤ 10 MB)、TASTI conference submission system 経由�
 - 学会: TASTI 2026 (Taiwan International Assembly of Space Science, Technology, and Industry)
 - 会期: 2026-11-08 〜 11-11、International Convention Center, Tainan, Taiwan
 - CfP: <https://tasti2026.conf.tw/site/page53.aspx?pid=901&sid=1691&lang=en>
-- トラック: **0201 Earth Observation and Remote Sensing** 推し (提出時に選択、未確定)
+- トラック: **0201 Earth Observation and Remote Sensing** で提出済み (2026-08-06)
 
-## 2. 現在の状態 — **本文完成、ビルド通過**
+## 2. 現在の状態 — **提出済み (T0043)**
 
 | 項目 | 状態 |
 | --- | --- |
@@ -92,9 +104,9 @@ template/             公式テンプレ PDF
 - `scripts/plot_speedup.py` は matplotlib。抄録では使わないが、
   **ポスター用リポジトリを作るときにここから pull すればよい**。
 
-## 4. 残タスク
+## 4. 提出までの記録 — **全項目完了**
 
-1. ~~コミット~~ — **完了** (2026-08-06、`f67531f`〜`7ad3f6b`)。`origin/main` に push 済み。
+1. ~~コミット~~ — **完了** (2026-08-06、`f67531f`〜)。`origin/main` に push 済み。
 2. **提出前チェックリスト** ([docs/submission_requirements.md](docs/submission_requirements.md) 末尾)
    — 2026-08-06 に全項目通過を確認済み。本文 670 words / title 15 words /
    keywords 5 / affiliation = 組織名 + 国名 / "Abstract" 見出しなし /
@@ -115,7 +127,21 @@ template/             公式テンプレ PDF
    フォントは newtx (TeX Gyre Termes、Times 互換メトリック) を維持する判断
    (Syota さん)。真の Times New Roman が要るなら XeLaTeX + fontspec に切替
    (sty 内にコメントあり)。
-5. **提出** — PDF を submission system にアップロード (≤ 10 MB。現状 ~180 KB で余裕)
+5. ~~提出~~ — **完了** (2026-08-06 15:42、Paper No. **T0043**)。上記 §提出完了 参照。
+
+## 4-2. 次フェーズ — ポスター (会期 2026-11-08〜11-11)
+
+このリポジトリは**抄録で役目を終える**。ポスターは別リポジトリを立てるのがよさそう。
+抄録から意図的に落とした手札が残っている:
+
+| 手札 | 出典 | ポスターで使える理由 |
+| --- | --- | --- |
+| **S1 系列** (同一 GPU で QR → Cholesky、internal 16.5× / step wall 4.49×) | [docs/results.md](docs/results.md) S1 | 抄録では基準が 2 つになるので外したが、ポスターは面積があるので 3 条件 (比較の両側 / シーン / internal であること) を添えれば出せる |
+| **DEM 誤差補正 6.2×**、18 step 完走 | 同 `correct_topography` 節 | 「同じコアが設計行列の差し替えだけで効く」一般性の主張 |
+| **Fig. 2** (5 シーン speedup チャート) | [scripts/plot_speedup.py](scripts/plot_speedup.py) | `make figures` で生成済み。ただし**規模依存は主張しない** ([docs/results.md](docs/results.md) の禁止事項はポスターでも有効) |
+| 姉妹 repo `vrc-insar-batched-cholesky-LT` の図 6 枚 | `error_budget` / `assembly_as_gemm` / `condition_*` / `tall_skinny_matrix` / `qr_column_sweep` | 日本語テキストが `<text>` 要素なので英語化は機械的にできる |
+| FORMOSAT-9 / 台湾の聴衆へのフック | [docs/abstract_notes.md](docs/abstract_notes.md) 注意 5 | **口頭で話す**方が効く、というのが元々の判断 (分解能の数字は出さない) |
+| PR #1490 のその後 | `gh pr view 1490 --repo insarlab/MintPy` | 11 月までに merge されていれば、そこはポスターで更新してよい |
 
 ## 5. 運用メモ
 
