@@ -66,9 +66,44 @@ speedup には**測定条件の違う 3 系列**があり、混ぜると誤り�
 
 - **4 処理系 × 2 波長 × 全て Zenodo 公開データ** — abstract の "five-scene
   benchmark spanning four interferometric processors and two radar wavelengths"
-  はこの表。
-- speedup 5.3〜93.8× のレンジは per-pixel solve コスト ($\propto K D^2$) で
-  構造的に決まる。Kuju (K=167, D=24) が床、SanFranBay (K=1297, D=333) が天井。
+  はこの表。この表で主張できるのは **external validity (どの条件でも一貫して速い)**
+  であって、**規模依存ではない** (下記)。
+
+### ⚠️ 規模依存は S3 では主張できない (2026-08-06 訂正)
+
+以前ここには「レンジは per-pixel solve コスト ($\propto K D^2$) で構造的に決まる。
+Kuju が床、SanFranBay が天井」と書いてあったが、**同じ表の実データと矛盾していた**。
+床は SanFranSen の 5.32×、天井は Fernandina の 93.77× が正しい。
+
+speedup と問題規模には相関がない (Spearman 順位相関):
+
+| 規模指標 | speedup との順位相関 |
+| --- | ---: |
+| ピクセル数 | **−0.20** |
+| per-pixel 演算密度 $KP^2 + P^3/3$ | **+0.00** |
+| 総演算量 (px × per-pixel) | **+0.20** |
+
+表の中に反例が並んでいる:
+
+- 最小級の **Fernandina (270 k px) が最速の 93.77×**
+- 最大の **Galapagos (3.40 M px) は 37.49×** — 最速ではない
+- Fernandina の 4 倍の規模の **SanFranSen (1.04 M px) が最遅の 5.32×**
+
+→ 「規模が大きいほど恩恵が大きい」と書くと**同じ表に否定される**。抄録・ポスター
+いずれでもこの主張はしないこと。
+
+**壊れているのは CPU 側ベースラインのばらつき**。GPU 時間は総演算量に対してほぼ単調
+(0.02 / 0.81 / 7.21 / 16.71 / 50.58 TFLOP → 4.53 / 6.88 / 11.07 / 17.42 / 79.40 s) だが、
+CPU 時間は SanFranSen (7.21 TFLOP) が 58.85 s、Fernandina (0.81 TFLOP) が 645.12 s —
+**9 倍の仕事量を 1/11 の時間で**終えている。処理系ごとの有効ピクセル数 (マスク) や
+データレイアウトの差が疑わしいが、未検証。
+
+- **規模依存を主張したいときは S2 を使う** (Galapagos 同一シーンの条件統一計測、
+  36.4× / 44.4×)。大規模シーンでの効きはこちらで担保できる。
+- 参考: 姉妹 repo `vrc-insar-batched-cholesky-LT` のスライドが「行列が大きいほど
+  効果は顕著」と言えているのは、5 シーンのうち **3 つ (Kuju / Galapagos / SanFranBay)
+  だけを D 昇順に並べている**ため。Fernandina と SanFranSen を外すと単調に見える。
+  LT での見せ方であって、**5 シーン全部を出す抄録では使えない**。
 - **数値一致**: float32 round-off gate (rms/|cpu|.max < 1e-5) を、ユーザーが
   見る**最終成果物** (velocity.h5・geocoded 出力) で **5/5 通過**。
 - 但し書き: Kuju / SanFranSen の 2 シーンはレーダー座標の**中間生成物**で
