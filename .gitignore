@@ -8,4 +8,7 @@
 *.out
 *.synctex.gz
 *.toc
-abstract.pdf
+*.pdf
+.agent/
+.claude/
+.codex/
