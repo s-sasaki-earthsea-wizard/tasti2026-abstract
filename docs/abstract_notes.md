@@ -80,8 +80,11 @@ democratization** を前面に、条件数の数理は裏方に
 
 1. **PR の状態と時制**: 現ドラフトは "has been submitted for upstream review"
    (= 事実、2026-08-06 時点で OPEN / REVIEW_REQUIRED)。**merged と書いてはいけない**。
-   提出日に `gh pr view 1490 --repo insarlab/MintPy --json state` で再確認し、
-   merged なら文言更新、closed (unmerged) なら "submitted" では事実とずれるので要再検討。
+
+   **2026-08-06 に内容を凍結した** (Syota さん判断)。以後 PR #1490 が merge されても
+   **抄録の文言は追わない** — 抄録は投稿時点のスナップショットとして扱い、
+   会期 (11 月) までの進展は**ポスター側で反映**する。
+   → 判断の記録 #14 参照。
 
 2. **⚠️ 本文の speedup は全て CPU 比に統一 (2026-08-06 決定)**。
    S1 系列 (同一 GPU の QR → Cholesky、internal **16.5×** / step wall **4.49×**) は
@@ -174,6 +177,8 @@ democratization** を前面に、条件数の数理は裏方に
 | 11 | affiliation | **Earthsea Wizard, Japan** | "(Independent Researcher)" を一度入れたが、公式文言「組織名 + 国名のみ」から外れるリスクを取らず撤回。個人事業であることは聞かれたら答える |
 | 13 | 本文フォント | **newtx (TeX Gyre Termes) のまま** | 規定は Times New Roman だが Times 互換メトリックで実用上十分。厳格運用が判明したら XeLaTeX + fontspec に切替 (`tasti2026.sty` にコメント) |
 | 12 | CholeskyQR2 の引用 | **¶2 に [3, 4] を追加** | 「Gram + Cholesky は GPU で有利」が突飛な発想でないことの裏付け。ただし**動機の支持まで** — 上記「注意 9」を厳守 |
+| 14 | 投稿後の情報更新 | **2026-08-06 時点で凍結。以後追わない** | 会期は 11 月で、それまでに PR #1490 や新しい計測に動きが出る見込み。抄録で毎回追うと数値の系列管理が壊れるし、査読される版と手元の版がずれる。**新しい話はポスターに載せる方が枠も自由度もある** (Syota さん判断) |
+| 15 | short abstract (≤ 200 words) | **本文の圧縮版を別ファイルで管理** ([../short_abstract.md](../short_abstract.md)) | 提出フォームに直接入力する欄。本文と同じ数値ルールを適用し、落とした要素と削る順番をファイル内に記録した |
 
 ## 図の実装メモ
 

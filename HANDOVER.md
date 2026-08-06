@@ -94,19 +94,20 @@ template/             公式テンプレ PDF
 
 ## 4. 残タスク
 
-1. **コミット** — `figures/` と `scripts/` が untracked のまま。粒度は
-   「図とビルド配線」「本文書き直し」「docs 訂正」の 3 つに分けるのがよさそう。
+1. ~~コミット~~ — **完了** (2026-08-06、`f67531f`〜`7ad3f6b`)。`origin/main` に push 済み。
 2. **提出前チェックリスト** ([docs/submission_requirements.md](docs/submission_requirements.md) 末尾)
    — 2026-08-06 に全項目通過を確認済み。本文 670 words / title 15 words /
    keywords 5 / affiliation = 組織名 + 国名 / "Abstract" 見出しなし /
    図キャプション下・表キャプション上 / 引用番号 1–7 が出現順 / bibitem 7 件 /
    Overfull・Underfull 0 件 / PDF 180 KB。
    **本文を編集したら再実行すること**。
-3. **提出当日に PR #1490 の状態を再確認**:
-   `gh pr view 1490 --repo insarlab/MintPy --json state`
-   - 2026-08-06 時点: **OPEN / REVIEW_REQUIRED** (最終更新 2026-07-16)
-   - merged なら本文の "submitted for upstream review" を更新
-   - closed (unmerged) なら "submitted" では事実とずれるので表現を再検討
+3. **⚠️ 抄録の内容は 2026-08-06 時点の情報で凍結** (Syota さん判断)
+   - PR #1490 は 2026-08-06 時点で **OPEN / REVIEW_REQUIRED** (最終更新 2026-07-16)。
+     本文の "has been submitted for upstream review" はこの状態と一致している。
+   - **会期 (2026-11) までに merge 等の動きがあっても抄録は追わない**。抄録は
+     「投稿時点のスナップショット」として扱う。
+   - 更新分・新しい結果は**ポスター側に書く**。ポスターまでには S1 系列や
+     DEM 補正、姉妹 repo の図など、抄録で落としたものを載せる余地がある。
 4. **公式テンプレとの比較** — 目視でなく `pdftotext -bbox-layout` で実測して
    合わせ込み済み ([docs/submission_requirements.md](docs/submission_requirements.md)
    §公式サンプル PDF との実測比較)。タイトルブロックは 184 pt → 99.9 pt に圧縮。
